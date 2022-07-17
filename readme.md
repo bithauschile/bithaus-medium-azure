@@ -7,19 +7,20 @@ Bithaus Medium Repo: https://github.com/bithauschile/bithaus-medium
 
 Medium provides an abstraction layer to message broker technologies such as Azure Service Bus and Kafka, so that you can use the same message library across your applications without the need of ugly generated message classes or having to worry about what message broker is handling your event. 
  
+This extension provides read/write integration with [Azure Service Bus](https://azure.microsoft.com/services/service-bus/) with the oficial SDK.
  <br>
  
 ## Quickstart
 <b>Simple Message definition</b>
-
+```java
     public class TestMessage extends MediumMessage {
 
         public String name;
         public Integer age;
     }
-    
+```    
 <b>Using the MessagingService</b>
-
+```java
     Map configMap = ... // Uses Kafka style configuration
     MediumMessagingServiceConfig config = new MediumMessagingServiceConfig(configMap);
     MediumMessagingService instance = new MediumMessagingService(config);
@@ -35,7 +36,13 @@ Medium provides an abstraction layer to message broker technologies such as Azur
             
             System.out.println("Name: " + message.name + " Age: " + message.age);
         }
-    });
+    });   
+
+    TestMessage tm = new TestMessage("Nico", 13);
+    instance.send(tm);
+    // or if you know the topic name
+    instance.send(tm, "topic1");   
+```
 <br>
 
 ***
@@ -43,7 +50,7 @@ Medium provides an abstraction layer to message broker technologies such as Azur
 
 ## Complete examples
 __Producer__
-
+```java
     public class SimpleMediumKafkaProducerApp {
         
         private static Boolean running = true ;
@@ -92,10 +99,10 @@ __Producer__
 
         }
     }
-
+```
 
 __Consumer__
-
+```java
     public class SimpleMediumKafkaConsumerApp {
         
         public static void Main(String args[]) throws Exception {
@@ -148,3 +155,4 @@ __Consumer__
 
         }
     }
+```    
