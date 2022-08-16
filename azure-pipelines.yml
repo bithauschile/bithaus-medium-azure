@@ -1,0 +1,49 @@
+# Bithaus Medium Datalake
+# Internal pipeline configuration
+
+trigger:
+- master
+
+resources:
+- repo: self
+
+variables:
+  vmImageName: 'ubuntu-latest'
+
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: DownloadSecureFile@1
+      name: mvnSettings
+      displayName: 'Download Maven settings'
+      inputs:
+        secureFile: 'maven-azuredevops-settings.xml'
+    - task: MavenAuthenticate@0
+      displayName: Maven Authenticate Artifacts
+      inputs:
+        artifactsFeeds: 'bithaus'
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'pom-devops.xml'
+        goals: 'deploy'
+        options: '-s $(mvnSettings.secureFilePath)'
+        mavenAuthenticateFeed: true
+        publishJUnitResults: false
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.11'
+        mavenVersionOption: 'Default'
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          ls -l
+ 
+
+ 
