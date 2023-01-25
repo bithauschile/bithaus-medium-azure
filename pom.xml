@@ -5,7 +5,7 @@
 
   <groupId>cl.bithaus</groupId>
   <artifactId>bithaus-medium-azure</artifactId>
-  <version>1.0</version>
+  <version>1.0.1</version>
   <packaging>jar</packaging>
   <name>Bithaus Medium - Azure Service Bus Driver</name>
 
