@@ -10,26 +10,28 @@
  */
 package cl.bithaus.medium.message.service.driver.azure;
 
-import cl.bithaus.medium.message.MediumMessage;
-import cl.bithaus.medium.message.service.driver.MediumMessagingServiceNetworkDriverCallback;
-import cl.bithaus.medium.utils.MessageUtils;
-import cl.bithaus.medium.record.MediumConsumerRecord;
-import cl.bithaus.medium.utils.test.TestMessage;
-import cl.bithaus.medium.utils.test.TestRecordGenerator;
-import com.google.gson.Gson;
 import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
-import org.junit.jupiter.api.AfterEach;
+
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.google.gson.Gson;
+
+import cl.bithaus.medium.message.MediumMessage;
+import cl.bithaus.medium.message.service.driver.MediumMessagingServiceNetworkDriverCallback;
+import cl.bithaus.medium.record.MediumConsumerRecord;
+import cl.bithaus.medium.utils.MessageUtils;
+import cl.bithaus.medium.utils.test.TestMessage;
+import cl.bithaus.medium.utils.test.TestRecordGenerator;
 
 /**
  *
@@ -39,7 +41,7 @@ public class MediumMessagingServiceAzureServiceBusDriverTest {
     
     private static final Logger logger = LoggerFactory.getLogger(MediumMessagingServiceAzureServiceBusDriverTest.class);
     
-    Gson gson = new Gson();
+    Gson gson = MessageUtils.getMediumGson();
     
     public MediumMessagingServiceAzureServiceBusDriverTest() throws Exception {
         java.util.logging.LogManager.getLogManager().readConfiguration(new FileInputStream("conf-example/logger.properties"));
