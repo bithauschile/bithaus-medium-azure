@@ -25,6 +25,8 @@ import com.azure.messaging.servicebus.ServiceBusSenderClient;
 import io.netty.util.internal.StringUtil;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +34,7 @@ import org.slf4j.LoggerFactory;
  * Azure service bus synchronous client for Medium
  * @author jmakuc
  */
-public class MediumMessagingServiceAzureServiceBusDriver implements MediumMessagingServiceNetworkDriver {
+public class MediumMessagingServiceAzureServiceBusDriver implements MediumMessagingServiceNetworkDriver, Consumer<ServiceBusReceivedMessageContext> {
 
     private static final Logger logger = LoggerFactory.getLogger(MediumMessagingServiceAzureServiceBusDriver.class);
     
@@ -164,25 +166,7 @@ public class MediumMessagingServiceAzureServiceBusDriver implements MediumMessag
                 throw new MediumMessagingServiceException("A queue or topic name is required for the sender (only one)");
             
             
-            processorBuilder.processMessage((t) -> {
-                
-                MediumConsumerRecord record = null;
-                
-                try {
-                    
-                    if(logger.isTraceEnabled())
-                        logger.trace("INCOMMING > " + t);
-                    
-                    record = fromServiceBus(t);
-                    
-                    this.callback.onMessage(record);
-                }
-                catch(Exception e) {
-                    
-                    logger.error("Error processing consumer record, sending to dead letter: " + record, e);
-                    t.deadLetter();
-                }
-            });
+            processorBuilder.processMessage(this);
             
             processorBuilder.processError((t) -> {
                
@@ -199,6 +183,27 @@ public class MediumMessagingServiceAzureServiceBusDriver implements MediumMessag
             throw new MediumMessagingServiceException("Error initilizing processor", e);
         }
     }    
+
+    @Override
+    public void accept(ServiceBusReceivedMessageContext t) {
+
+        MediumConsumerRecord record = null;
+                
+        try {
+            
+            if(logger.isTraceEnabled())
+                logger.trace("INCOMMING > " + t);
+            
+            record = fromServiceBus(t);
+            
+            this.callback.onMessage(record);
+        }
+        catch(Exception e) {
+            
+            logger.error("Error processing consumer record, sending to dead letter: " + record, e);
+            t.deadLetter();
+        }
+    }
     
 
     @Override
@@ -216,6 +221,17 @@ public class MediumMessagingServiceAzureServiceBusDriver implements MediumMessag
             logger.trace("OUT > " + msg);
         
         this.sender.sendMessage(msg);
+    }
+
+    /**
+     * TEMPORARY: send async is not supported. Alias for send.
+     * @param record
+     * @throws MediumMessagingServiceException
+     */
+    @Override
+    public void sendAsync(MediumProducerRecord record) throws MediumMessagingServiceException {
+
+        this.send(record);
     }
 
     @Override

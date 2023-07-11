@@ -5,10 +5,10 @@
 
   <groupId>cl.bithaus</groupId>
   <artifactId>bithaus-medium-azure</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.4</version>
   <packaging>jar</packaging>
   <name>Bithaus Medium - Azure Service Bus Driver</name>
-
+  <description>Driver to interact with Azure Service Bus with Medium Messaging Service</description>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
@@ -48,7 +48,7 @@
     <dependency>
       <groupId>cl.bithaus</groupId>
       <artifactId>bithaus-medium</artifactId>
-      <version>1.1.0</version>
+      <version>1.2.7</version>
     </dependency>
 
     <!-- BASIC ================================== -->
@@ -86,7 +86,7 @@
 
 
   <build>
-    <finalName>bithaus-medium-datalake</finalName>
+    <finalName>bithaus-medium-azure</finalName>
     <plugins>
 
 
@@ -122,6 +122,41 @@
         </executions>
 
       </plugin>
+
+
+      <plugin>
+          <groupId>org.codehaus.gmaven</groupId>
+          <artifactId>groovy-maven-plugin</artifactId>
+          <version>2.1.1</version>
+          <executions>
+              <execution>
+                  <phase>validate</phase>
+                  <goals>
+                      <goal>execute</goal>
+                  </goals>
+                  <configuration>
+                      <source>
+
+                          log.info("    ____  _ __  __                        _____       ______                         "); 
+                          log.info("   / __ )(_) /_/ /_  ____ ___  _______   / ___/____  / __/ /__      ______ _________ "); 
+                          log.info("  / __  / / __/ __ \\/ __ `/ / / / ___/   \\__ \\/ __ \\/ /_/ __/ | /| / / __ `/ ___/ _ \\"); 
+                          log.info(" / /_/ / / /_/ / / / /_/ / /_/ (__  )   ___/ / /_/ / __/ /_ | |/ |/ / /_/ / /  /  __/"); 
+                          log.info("/_____/_/\\__/_/ /_/\\__,_/\\__,_/____/   /____/\\____/_/  \\__/ |__/|__/\\__,_/_/   \\___/ "); 
+
+                          log.info(""); 
+                          log.info("${project.name} - Version ${project.version}"); 
+                          log.info("${project.description}");    
+                          log.info(""); 
+                          log.info("=====================================================================================");
+                          log.info(""); 
+
+                      </source>
+                  </configuration>
+              </execution>
+
+          </executions>
+      </plugin>
+            
     </plugins>
   </build>
 </project>
