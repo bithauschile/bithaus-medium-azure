@@ -23,6 +23,8 @@ import com.azure.messaging.servicebus.ServiceBusReceivedMessage;
 import com.azure.messaging.servicebus.ServiceBusReceivedMessageContext;
 import com.azure.messaging.servicebus.ServiceBusSenderClient;
 import io.netty.util.internal.StringUtil;
+import io.opentelemetry.instrumentation.annotations.WithSpan;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -184,6 +186,7 @@ public class MediumMessagingServiceAzureServiceBusDriver implements MediumMessag
         }
     }    
 
+    @WithSpan
     @Override
     public void accept(ServiceBusReceivedMessageContext t) {
 
@@ -205,7 +208,7 @@ public class MediumMessagingServiceAzureServiceBusDriver implements MediumMessag
         }
     }
     
-
+    @WithSpan
     @Override
     public void send(MediumProducerRecord record) throws MediumMessagingServiceException {
         
@@ -228,6 +231,7 @@ public class MediumMessagingServiceAzureServiceBusDriver implements MediumMessag
      * @param record
      * @throws MediumMessagingServiceException
      */
+    @WithSpan
     @Override
     public void sendAsync(MediumProducerRecord record) throws MediumMessagingServiceException {
 
@@ -282,6 +286,7 @@ public class MediumMessagingServiceAzureServiceBusDriver implements MediumMessag
     
     
     
+    @WithSpan
     public static ServiceBusMessage fromMediumProducerRecord(MediumProducerRecord record) {
         
         
@@ -297,6 +302,7 @@ public class MediumMessagingServiceAzureServiceBusDriver implements MediumMessag
         return msg;
     }
     
+    @WithSpan
     public static MediumConsumerRecord fromServiceBus(ServiceBusReceivedMessageContext context) {
         
         
