@@ -227,6 +227,15 @@ public class MediumMessagingServiceAzureServiceBusDriver implements MediumMessag
     }
 
     /**
+     * Does nothing, the underlying driver is only synchronous
+     */
+    @WithSpan
+    @Override
+    public void flush() throws MediumMessagingServiceException {
+                
+    }
+
+    /**
      * TEMPORARY: send async is not supported. Alias for send.
      * @param record
      * @throws MediumMessagingServiceException
