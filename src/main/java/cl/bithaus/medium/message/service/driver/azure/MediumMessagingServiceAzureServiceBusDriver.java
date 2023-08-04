@@ -253,7 +253,7 @@ public class MediumMessagingServiceAzureServiceBusDriver implements MediumMessag
     }
 
     @Override
-    public String[] getAvailableTopic() {
+    public String[] getAvailableTopics() {
         return new String[] { this.processorReadFromName } ;
     }
 
