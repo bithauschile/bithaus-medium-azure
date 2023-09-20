@@ -30,9 +30,9 @@ stages:
         artifactsFeeds: 'bithaus'
     - task: Maven@3
       inputs:
-        mavenPomFile: 'pom-devops.xml'
+        mavenPomFile: 'pom.xml'
         goals: 'deploy'
-        options: '-s $(mvnSettings.secureFilePath)'
+        options: '-Pprofile-devops $(mvnSettings.secureFilePath)'
         mavenAuthenticateFeed: true
         publishJUnitResults: false
         javaHomeOption: 'JDKVersion'

@@ -5,8 +5,8 @@ Bithaus Medium - Azure Driver
 
 Bithaus Medium Repo: https://github.com/bithauschile/bithaus-medium
 
-Medium provides an abstraction layer to message broker technologies such as Azure Service Bus and Kafka, so that you can use the same message library across your applications without the need of ugly generated message classes or having to worry about what message broker is handling your event. 
- 
+Medium provides an abstraction layer to Kafka or other streaming technologies so that you can use the same message library across your applications without the need of ugly generated message classes or having to worry about what message broker is handling your event. 
+
 This extension provides read/write integration with [Azure Service Bus](https://azure.microsoft.com/services/service-bus/) with the oficial SDK.
  <br>
  

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>cl.bithaus</groupId>
@@ -13,8 +15,78 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
-    <maven.test.skip>true</maven.test.skip>
   </properties>
+
+
+  <profiles>
+    <profile>
+      <id>profile-local</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <maven.test.skip>false</maven.test.skip>
+      </properties>
+      <build>
+        <plugins>
+          <!-- En construcción no devops agregamos los fuentes -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.2.1</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+
+        </plugins>
+      </build>
+
+    </profile>
+
+    <profile>
+      <id>profile-devops</id>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <properties>
+        <maven.test.skip>true</maven.test.skip>
+      </properties>
+
+      <distributionManagement>
+        <repository>
+          <id>medium_artifact</id>
+          <url>https://bithaus.pkgs.visualstudio.com/BithausMedium/_packaging/medium_artifact/maven/v1</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </distributionManagement>
+
+    </profile>
+  </profiles>
+
+
+  <repositories>
+    <repository>
+      <id>bithaus</id>
+      <url>https://bithaus.pkgs.visualstudio.com/BithausMedium/_packaging/medium_artifact/maven/v1</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
 
   <dependencies>
 
@@ -22,7 +94,7 @@
     <dependency>
       <groupId>cl.bithaus</groupId>
       <artifactId>bithaus-medium</artifactId>
-      <version>1.2.14</version>
+      <version>1.2.15</version>
     </dependency>
 
     <!-- BASIC ================================== -->
@@ -40,7 +112,7 @@
       <groupId>io.opentelemetry.instrumentation</groupId>
       <artifactId>opentelemetry-instrumentation-annotations</artifactId>
       <version>1.28.0</version>
-    </dependency>     
+    </dependency>
 
     <!-- AZURE ================================== -->
     <dependency>
@@ -103,38 +175,42 @@
       </plugin>
 
       <plugin>
-          <groupId>org.codehaus.gmaven</groupId>
-          <artifactId>groovy-maven-plugin</artifactId>
-          <version>2.1.1</version>
-          <executions>
-              <execution>
-                  <phase>validate</phase>
-                  <goals>
-                      <goal>execute</goal>
-                  </goals>
-                  <configuration>
-                      <source>
+        <groupId>org.codehaus.gmaven</groupId>
+        <artifactId>groovy-maven-plugin</artifactId>
+        <version>2.1.1</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>execute</goal>
+            </goals>
+            <configuration>
+              <source>
 
-                          log.info("    ____  _ __  __                        _____       ______                         "); 
-                          log.info("   / __ )(_) /_/ /_  ____ ___  _______   / ___/____  / __/ /__      ______ _________ "); 
-                          log.info("  / __  / / __/ __ \\/ __ `/ / / / ___/   \\__ \\/ __ \\/ /_/ __/ | /| / / __ `/ ___/ _ \\"); 
-                          log.info(" / /_/ / / /_/ / / / /_/ / /_/ (__  )   ___/ / /_/ / __/ /_ | |/ |/ / /_/ / /  /  __/"); 
-                          log.info("/_____/_/\\__/_/ /_/\\__,_/\\__,_/____/   /____/\\____/_/  \\__/ |__/|__/\\__,_/_/   \\___/ "); 
+                log.info(" ____ _ __ __ _____ ______ ");
+                log.info(" / __ )(_) /_/ /_ ____ ___ _______ / ___/____ / __/ /__ ______ _________
+                ");
+                log.info(" / __ / / __/ __ \\/ __ `/ / / / ___/ \\__ \\/ __ \\/ /_/ __/ | /| / / __
+                `/ ___/ _ \\");
+                log.info(" / /_/ / / /_/ / / / /_/ / /_/ (__ ) ___/ / /_/ / __/ /_ | |/ |/ / /_/ / /
+                / __/");
+                log.info("/_____/_/\\__/_/ /_/\\__,_/\\__,_/____/ /____/\\____/_/ \\__/
+                |__/|__/\\__,_/_/ \\___/ ");
 
-                          log.info(""); 
-                          log.info("${project.name} - Version ${project.version}"); 
-                          log.info("${project.description}");    
-                          log.info(""); 
-                          log.info("=====================================================================================");
-                          log.info(""); 
+                log.info("");
+                log.info("${project.name} - Version ${project.version}");
+                log.info("${project.description}");
+                log.info("");
+                log.info("=====================================================================================");
+                log.info("");
 
-                      </source>
-                  </configuration>
-              </execution>
+              </source>
+            </configuration>
+          </execution>
 
-          </executions>
+        </executions>
       </plugin>
-                  
+
     </plugins>
   </build>
 </project>
