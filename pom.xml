@@ -71,22 +71,24 @@
         </repository>
       </distributionManagement>
 
+      <repositories>
+        <repository>
+          <id>bithaus</id>
+          <url>https://bithaus.pkgs.visualstudio.com/BithausMedium/_packaging/medium_artifact/maven/v1</url>
+          <releases>
+            <enabled>true</enabled>
+          </releases>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+        </repository>
+      </repositories>
+
     </profile>
   </profiles>
 
 
-  <repositories>
-    <repository>
-      <id>bithaus</id>
-      <url>https://bithaus.pkgs.visualstudio.com/BithausMedium/_packaging/medium_artifact/maven/v1</url>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-    </repository>
-  </repositories>
+
 
   <dependencies>
 
@@ -187,22 +189,19 @@
             <configuration>
               <source>
 
-                log.info(" ____ _ __ __ _____ ______ ");
-                log.info(" / __ )(_) /_/ /_ ____ ___ _______ / ___/____ / __/ /__ ______ _________
-                ");
-                log.info(" / __ / / __/ __ \\/ __ `/ / / / ___/ \\__ \\/ __ \\/ /_/ __/ | /| / / __
-                `/ ___/ _ \\");
-                log.info(" / /_/ / / /_/ / / / /_/ / /_/ (__ ) ___/ / /_/ / __/ /_ | |/ |/ / /_/ / /
-                / __/");
-                log.info("/_____/_/\\__/_/ /_/\\__,_/\\__,_/____/ /____/\\____/_/ \\__/
-                |__/|__/\\__,_/_/ \\___/ ");
+                log.info("    ____  _ __  __                        _____       ______                         "); 
+                log.info("   / __ )(_) /_/ /_  ____ ___  _______   / ___/____  / __/ /__      ______ _________ "); 
+                log.info("  / __  / / __/ __ \\/ __ `/ / / / ___/   \\__ \\/ __ \\/ /_/ __/ | /| / / __ `/ ___/ _ \\"); 
+                log.info(" / /_/ / / /_/ / / / /_/ / /_/ (__  )   ___/ / /_/ / __/ /_ | |/ |/ / /_/ / /  /  __/"); 
+                log.info("/_____/_/\\__/_/ /_/\\__,_/\\__,_/____/   /____/\\____/_/  \\__/ |__/|__/\\__,_/_/   \\___/ "); 
 
-                log.info("");
-                log.info("${project.name} - Version ${project.version}");
-                log.info("${project.description}");
-                log.info("");
+                log.info(""); 
+                log.info("${project.name} - Version ${project.version}"); 
+                log.info("${project.description}");    
+                log.info(""); 
                 log.info("=====================================================================================");
-                log.info("");
+                log.info(""); 
+
 
               </source>
             </configuration>
