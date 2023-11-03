@@ -7,7 +7,7 @@
 
   <groupId>cl.bithaus</groupId>
   <artifactId>bithaus-medium-azure</artifactId>
-  <version>1.0.8</version>
+  <version>1.0.9</version>
   <packaging>jar</packaging>
   <name>Bithaus Medium - Azure Service Bus Driver</name>
   <description>Driver to interact with Azure Service Bus with Medium Messaging Service</description>
@@ -96,43 +96,43 @@
     <dependency>
       <groupId>cl.bithaus</groupId>
       <artifactId>bithaus-medium</artifactId>
-      <version>1.2.15</version>
+      <version>1.2.16</version>
     </dependency>
 
     <!-- BASIC ================================== -->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.30</version>
+      <version>1.7.36</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-jdk14</artifactId>
-      <version>1.7.28</version>
+      <version>1.7.36</version>
     </dependency>
     <dependency>
       <groupId>io.opentelemetry.instrumentation</groupId>
       <artifactId>opentelemetry-instrumentation-annotations</artifactId>
-      <version>1.28.0</version>
+      <version>1.31.0</version>
     </dependency>
 
     <!-- AZURE ================================== -->
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core</artifactId>
-      <version>1.25.0</version>
+      <version>1.44.1</version>
     </dependency>
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-messaging-servicebus</artifactId>
-      <version>7.6.0</version>
+      <version>7.14.5</version>
     </dependency>
 
     <!-- TEST -->
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>5.8.2</version>
+      <version>5.10.0</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
