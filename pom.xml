@@ -7,7 +7,7 @@
 
   <groupId>cl.bithaus</groupId>
   <artifactId>bithaus-medium-azure</artifactId>
-  <version>1.0.11</version>
+  <version>1.0.12</version>
   <packaging>jar</packaging>
   <name>Bithaus Medium - Azure Service Bus Driver</name>
   <description>Driver to interact with Azure Service Bus with Medium Messaging Service</description>
@@ -96,7 +96,7 @@
     <dependency>
       <groupId>cl.bithaus</groupId>
       <artifactId>bithaus-medium</artifactId>
-      <version>1.2.19</version>
+      <version>1.2.20</version>
     </dependency>
 
     <!-- BASIC ================================== -->
